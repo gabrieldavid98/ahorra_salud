@@ -5,3 +5,8 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+
+IdentificationType.insert_all([
+  {id: 1, short_name: "CC", long_name: "Cédula de Ciudadanía"},
+  {id: 2, short_name: "TI", long_name: "Tarjeta de Identidad"}
+])

@@ -1,0 +1,36 @@
+# == Schema Information
+#
+# Table name: doctor_profiles
+#
+#  id                     :bigint           not null, primary key
+#  doctor_id              :bigint           not null
+#  names                  :string
+#  last_names             :string
+#  identification_type_id :bigint           not null
+#  identification         :integer
+#  sex                    :boolean
+#  birthdate              :date
+#  phone                  :string
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
+#
+
+one:
+  doctor: one
+  names: MyString
+  last_names: MyString
+  identification_type: one
+  identification: 1
+  sex: false
+  birthdate: 2024-09-20
+  phone: MyString
+
+two:
+  doctor: two
+  names: MyString
+  last_names: MyString
+  identification_type: two
+  identification: 1
+  sex: false
+  birthdate: 2024-09-20
+  phone: MyString
