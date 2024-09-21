@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
-  resources :doctor_profiles
-  resources :user_profiles
-  devise_for :doctors
-  devise_for :users
+  devise_for :supports
+  devise_for :admins
+  resources :tests
+  devise_for :patients
+
+  resources :patient_profiles
+  resources :appointments
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
