@@ -1,8 +1,7 @@
 <%= form_with(model: patient_profile) do |form| %>
   <% if patient_profile.errors.any? %>
     <div style="color: red">
-      <h2><%= pluralize(patient_profile.errors.count, "error") %> prohibited this patient_profile from being saved:</h2>
-
+      <h2>Error al guardar</h2>
       <ul>
         <% patient_profile.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -10,53 +9,29 @@
       </ul>
     </div>
   <% end %>
-
-  <div>
-    <%= form.label :patient_id, style: "display: block" %>
-    <%= form.text_field :patient_id %>
-  </div>
-
-  <div>
-    <%= form.label :names, style: "display: block" %>
-    <%= form.text_field :names %>
-  </div>
-
-  <div>
-    <%= form.label :last_names, style: "display: block" %>
-    <%= form.text_field :last_names %>
-  </div>
-
-  <div>
-    <%= form.label :identification_type_id, style: "display: block" %>
-    <%= form.text_field :identification_type_id %>
-  </div>
-
-  <div>
-    <%= form.label :identification, style: "display: block" %>
-    <%= form.number_field :identification %>
-  </div>
-
-  <div>
-    <%= form.label :address, style: "display: block" %>
-    <%= form.text_field :address %>
-  </div>
-
-  <div>
-    <%= form.label :phone, style: "display: block" %>
-    <%= form.text_field :phone %>
-  </div>
-
-  <div>
-    <%= form.label :sex, style: "display: block" %>
-    <%= form.check_box :sex %>
-  </div>
-
-  <div>
-    <%= form.label :birthdate, style: "display: block" %>
-    <%= form.date_field :birthdate %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
+  <fieldset class="uk-fieldset">
+    <%= form.text_field :names, placeholder: "Nombres", class: "uk-input uk-margin-bottom" %>
+    <%= form.text_field :last_names, placeholder: "Apellidos", class: "uk-input uk-margin-bottom" %>
+    <uk-select name="patient_profile[identification_type_id]"
+      placeholder="Seleccione un Tipo de Identificacíon" uk-cloak>
+      <% @identification_types.each do |i| %>
+        <option value="<%= i.id %>"><%= i.long_name %></option>
+      <% end %>
+    </uk-select>
+    <%= form.number_field :identification, placeholder: "Identificacíon", class: "uk-input uk-margin-bottom uk-margin-top" %>
+    <%= form.text_field :address, placeholder: "Direccíon", class: "uk-input uk-margin-bottom" %>
+    <%= form.text_field :phone, placeholder: "Telefono", class: "uk-input uk-margin-bottom" %>
+    <uk-select name="patient_profile[sex]"
+      placeholder="Seleccione su sexo" uk-cloak>
+      <option value="0">Hombre</option>
+      <option value="1">Mujer</option>
+    </uk-select>
+    <div class="uk-margin-top uk-flex uk-flex-column">
+      <%= form.label :birthdate, "Fecha de Nacimiento", class: "uk-text-small uk-margin-small-bottom" %>
+      <%= form.date_field :birthdate, class: "uk-input uk-margin-bottom" %>
+    </div>
+    <div class="uk-text-center">
+      <%= form.submit "Completar Perfil", class: "uk-button uk-button-primary uk-margin-bottom" %>
+    </div>
+  </fieldset>
 <% end %>

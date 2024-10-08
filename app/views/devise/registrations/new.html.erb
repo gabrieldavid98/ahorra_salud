@@ -1,29 +1,27 @@
-<h2>Sign up</h2>
-
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
+<%= render layout: "layouts/form_positioner", locals: { title: "Registrarse" } do %>
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
+    <fieldset class="uk-fieldset">
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "uk-input uk-margin-bottom", placeholder: "Email" %>
+      <%= f.password_field :password, autocomplete: "new-password", class: "uk-input", placeholder: "Contraseña" %>
+      <% if @minimum_password_length %>
+        <em class="uk-text-small">(<%= @minimum_password_length %> caracteres minimo)</em>
+      <% end %>
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "uk-input uk-margin-top uk-margin-bottom", placeholder: "Confirmar Contraseña" %>
+      <div class="uk-text-center">
+        <%= f.submit "Registrarse", class: "uk-button uk-button-primary uk-margin-bottom" %>
+      </div>
+    </fieldset>
+  <% end %>
+  <%= render "devise/shared/links" %>
+  <div class="uk-margin-large-top uk-text-small">
+    <%= link_to root_path do %>
+      <div class="uk-flex uk-flex-middle">
+        <div>
+          <uk-icon icon="chevron-left" width="16" height="16" />
+        </div>
+        Regresar
+      </div>
+    <% end %>
   </div>
 <% end %>
-
-<%= render "devise/shared/links" %>

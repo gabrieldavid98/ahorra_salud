@@ -1,10 +1,11 @@
-<p style="color: green"><%= notice %></p>
-
-<%= render @appointment %>
-
-<div>
-  <%= link_to "Edit this appointment", edit_appointment_path(@appointment) %> |
-  <%= link_to "Back to appointments", appointments_path %>
-
-  <%= button_to "Destroy this appointment", @appointment, method: :delete %>
-</div>
+<%= render layout: "layouts/positioner", locals: { title: "Detalle" } do %>
+  <div id="<%= dom_id @appointment %>" class="uk-card">
+    <div class="uk-card-body">
+      <%= render @appointment %>
+    </div>
+    <div class="uk-card-footer uk-flex uk-flex-between">
+      <%= link_to "Regresar", appointments_path, class: "uk-button uk-button-default" %>
+      <%= button_to "Eliminar Cita Medica", @appointment, method: :delete, class: "uk-button uk-button-danger" %>
+    </div>
+  </div>
+<% end %>

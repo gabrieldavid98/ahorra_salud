@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_09_21_174454) do
+ActiveRecord::Schema[7.0].define(version: 2024_10_07_025553) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -80,6 +80,40 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_21_174454) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "medical_records", force: :cascade do |t|
+    t.bigint "patient_id", null: false
+    t.bigint "doctor_id", null: false
+    t.bigint "appointment_id", null: false
+    t.string "disability"
+    t.string "allergies"
+    t.text "appointment_reason"
+    t.text "background"
+    t.text "analysis"
+    t.text "recommendations"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["appointment_id"], name: "index_medical_records_on_appointment_id"
+    t.index ["doctor_id"], name: "index_medical_records_on_doctor_id"
+    t.index ["patient_id"], name: "index_medical_records_on_patient_id"
+  end
+
+  create_table "medicament_authorizations", force: :cascade do |t|
+    t.bigint "medical_record_id", null: false
+    t.bigint "doctor_id", null: false
+    t.bigint "appointment_id", null: false
+    t.bigint "patient_id", null: false
+    t.string "name"
+    t.integer "quantity"
+    t.integer "periodicity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "status", default: 0
+    t.index ["appointment_id"], name: "index_medicament_authorizations_on_appointment_id"
+    t.index ["doctor_id"], name: "index_medicament_authorizations_on_doctor_id"
+    t.index ["medical_record_id"], name: "index_medicament_authorizations_on_medical_record_id"
+    t.index ["patient_id"], name: "index_medicament_authorizations_on_patient_id"
+  end
+
   create_table "patient_profiles", force: :cascade do |t|
     t.bigint "patient_id", null: false
     t.string "names"
@@ -147,6 +181,13 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_21_174454) do
   add_foreign_key "chat_messages", "chats"
   add_foreign_key "chat_messages", "supports"
   add_foreign_key "chats", "patients"
+  add_foreign_key "medical_records", "appointments"
+  add_foreign_key "medical_records", "doctors"
+  add_foreign_key "medical_records", "patients"
+  add_foreign_key "medicament_authorizations", "appointments"
+  add_foreign_key "medicament_authorizations", "doctors"
+  add_foreign_key "medicament_authorizations", "medical_records"
+  add_foreign_key "medicament_authorizations", "patients"
   add_foreign_key "patient_profiles", "identification_types"
   add_foreign_key "patient_profiles", "patients"
   add_foreign_key "tests", "doctors"

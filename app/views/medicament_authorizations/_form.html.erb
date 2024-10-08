@@ -1,0 +1,52 @@
+<%= form_with(model: medicament_authorization) do |form| %>
+  <% if medicament_authorization.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(medicament_authorization.errors.count, "error") %> prohibited this medicament_authorization from being saved:</h2>
+
+      <ul>
+        <% medicament_authorization.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :medical_record_id, style: "display: block" %>
+    <%= form.text_field :medical_record_id %>
+  </div>
+
+  <div>
+    <%= form.label :doctor_id, style: "display: block" %>
+    <%= form.text_field :doctor_id %>
+  </div>
+
+  <div>
+    <%= form.label :appointment_id, style: "display: block" %>
+    <%= form.text_field :appointment_id %>
+  </div>
+
+  <div>
+    <%= form.label :patient_id, style: "display: block" %>
+    <%= form.text_field :patient_id %>
+  </div>
+
+  <div>
+    <%= form.label :name, style: "display: block" %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+    <%= form.label :quantity, style: "display: block" %>
+    <%= form.number_field :quantity %>
+  </div>
+
+  <div>
+    <%= form.label :periodicity, style: "display: block" %>
+    <%= form.number_field :periodicity %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

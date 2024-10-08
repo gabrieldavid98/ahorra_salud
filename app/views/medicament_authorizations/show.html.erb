@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @medicament_authorization %>
+
+<div>
+  <%= link_to "Edit this medicament authorization", edit_medicament_authorization_path(@medicament_authorization) %> |
+  <%= link_to "Back to medicament authorizations", medicament_authorizations_path %>
+
+  <%= button_to "Destroy this medicament authorization", @medicament_authorization, method: :delete %>
+</div>

@@ -13,3 +13,19 @@
  *= require_tree .
  *= require_self
  */
+
+.stethoscope-icon {
+  color: #16a34a;
+}
+
+.test-tube-diagonal-icon {
+  color: #0d9488;
+}
+
+.message-circle-question-icon {
+  color: #2563eb;
+}
+
+.book-marked-icon {
+  color: #4f46e5;
+}

@@ -1,0 +1,22 @@
+<table class="uk-table">
+  <thead>
+    <tr>
+      <th>Doctor</th>
+      <th>Especialidad</th>
+      <th>Fecha</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <%= "#{medical_record.doctor.names} #{medical_record.doctor.last_names}" %>
+      </td>
+      <td>
+        <%= medical_record.appointment.specialty.name %>
+      </td>
+      <td>
+        <%= I18n.l(medical_record.appointment.date_time, format: :long) %>
+      </td>
+    </tr>
+  </tbody>
+</table>

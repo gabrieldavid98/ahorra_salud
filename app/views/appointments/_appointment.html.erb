@@ -1,27 +1,27 @@
-<div id="<%= dom_id appointment %>">
-  <p>
-    <strong>Doctor:</strong>
-    <%= appointment.doctor_id %>
-  </p>
-
-  <p>
-    <strong>User:</strong>
-    <%= appointment.user_id %>
-  </p>
-
-  <p>
-    <strong>Speciality:</strong>
-    <%= appointment.speciality_id %>
-  </p>
-
-  <p>
-    <strong>Health center:</strong>
-    <%= appointment.health_center_id %>
-  </p>
-
-  <p>
-    <strong>Date time:</strong>
-    <%= appointment.date_time %>
-  </p>
-
-</div>
+<table class="uk-table">
+  <thead>
+    <tr>
+      <th>Doctor</th>
+      <th>Especialidad</th>
+      <th>Centro de Salud</th>
+      <th>Fecha</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <%= "#{appointment.doctor.names} #{appointment.doctor.last_names}" %>
+      </td>
+      <td>
+        <%= appointment.specialty.name %>
+      </td>
+      <td>
+        <%= appointment.health_center.name %> <br/>
+        <%= appointment.health_center.address %>
+      </td>
+      <td>
+        <%= I18n.l(appointment.date_time, format: :long) %>
+      </td>
+    </tr>
+  </tbody>
+</table>

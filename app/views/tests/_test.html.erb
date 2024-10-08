@@ -1,27 +1,25 @@
-<div id="<%= dom_id test %>">
-  <p>
-    <strong>Title:</strong>
+<table class="uk-table">
+  <caption>
     <%= test.title %>
-  </p>
-
-  <p>
-    <strong>Patient:</strong>
-    <%= test.patient_id %>
-  </p>
-
-  <p>
-    <strong>Doctor:</strong>
-    <%= test.doctor_id %>
-  </p>
-
-  <p>
-    <strong>Date time:</strong>
-    <%= test.date_time %>
-  </p>
-
-  <p>
-    <strong>Results:</strong>
-    <%= test.results %>
-  </p>
-
-</div>
+  </caption>
+  <thead>
+    <tr>
+      <th>Doctor</th>
+      <th>Fecha y Hora</th>
+      <th>Resultados</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <%= "#{test.doctor.names} #{test.doctor.last_names}" %>
+      </td>
+      <td>
+        <%= I18n.l(test.date_time, format: :long) %>
+      </td>
+      <td>
+        <%= test.results %> <br/>
+      </td>
+    </tr>
+  </tbody>
+</table>

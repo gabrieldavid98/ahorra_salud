@@ -83,6 +83,4 @@ test:
 #
 production:
   <<: *default
-  database: ahorra_salud_production
-  username: ahorra_salud
-  password: <%= ENV["AHORRA_SALUD_DATABASE_PASSWORD"] %>
+  url: <%= ENV["DATABASE_URL"] %>

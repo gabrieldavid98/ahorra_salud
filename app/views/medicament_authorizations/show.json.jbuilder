@@ -1,0 +1,1 @@
+json.partial! "medicament_authorizations/medicament_authorization", medicament_authorization: @medicament_authorization

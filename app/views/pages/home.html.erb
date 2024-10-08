@@ -1,7 +1,77 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
-<% if user_signed_in? %>
-  <%= link_to "Cerrar Sesion", destroy_user_session_path, method: :delete, data: {turbo_method: :delete} %>
+<% if patient_signed_in? %>
+  <div class="uk-width-1-1 uk-flex uk-flex-column uk-flex-center uk-flex-middle uk-margin-xlarge-top">
+    <div class="uk-grid-small uk-text-center" uk-grid>
+      <div>
+        <%= link_to appointments_path do %>
+          <div class="uk-card uk-card-body uk-card-default uk-width-small uk-height-small uk-flex uk-flex-column uk-flex-center uk-flex-middle">
+            <uk-icon icon="stethoscope" height="64" width="64" custom-class="stethoscope-icon"></uk-icon>
+            Citas Medicas
+          </div>
+        <% end %>
+      </div>
+      <div>
+        <%= link_to tests_path do %>
+          <div class="uk-card uk-card-body uk-card-default uk-width-small uk-height-small uk-flex uk-flex-column uk-flex-center uk-flex-middle">
+            <uk-icon icon="test-tube-diagonal" height="64" width="64" custom-class="test-tube-diagonal-icon"></uk-icon>
+            Examenes Medicos
+          </div>
+        <% end %>
+      </div>
+      <div>
+        <%= link_to medical_records_path  do %>
+          <div class="uk-card uk-card-body uk-card-default uk-width-small uk-height-small uk-flex uk-flex-column uk-flex-center uk-flex-middle">
+            <uk-icon icon="book-marked" height="64" width="64" custom-class="book-marked-icon"></uk-icon>
+            Historia Clinica
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="uk-grid-small uk-text-center" uk-grid>
+      <div>
+        <%= link_to medicament_authorizations_path  do %>
+          <div class="uk-card uk-card-body uk-card-default uk-width-small uk-height-small uk-flex uk-flex-column uk-flex-center uk-flex-middle">
+            <uk-icon icon="pill" height="64" width="64" custom-class="pill-icon"></uk-icon>
+            Autorizacíon Medicamentos
+          </div>
+        <% end %>
+      </div>
+      <div>
+        <%= link_to chat_home_path do %>
+          <div class="uk-card uk-card-body uk-card-default uk-width-small uk-height-small uk-flex uk-flex-column uk-flex-center uk-flex-middle">
+            <uk-icon icon="message-circle-question" height="64" width="64" custom-class="message-circle-question-icon"></uk-icon>
+            Chat de Soporte
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
 <% else %>
-  <%= link_to "Iniciar Sesion", new_user_session_path %>
+  <div class="uk-width-1-1 uk-flex uk-flex-column uk-flex-center uk-flex-middle uk-margin-xlarge-top">
+    <div class="uk-flex uk-flex-row uk-flex-middle uk-margin-large-bottom">
+      <div class="uk-margin-right">
+        <uk-icon icon="heart-pulse" width="48" height="48" />
+      </div>
+      <div class="uk-h2">
+        Ahorra Salud
+      </div>
+    </div>
+    <div class="uk-grid-small uk-text-center" uk-grid>
+      <div>
+        <%= link_to new_patient_session_path do %>
+          <div class="uk-card uk-card-body uk-card-default uk-width-small uk-height-small uk-flex uk-flex-column uk-flex-center uk-flex-middle">
+            <uk-icon icon="user" height="64" width="64"></uk-icon>
+            Ingreso Pacientes
+          </div>
+        <% end %>
+      </div>
+      <div>
+        <%= link_to  new_support_session_path do %>
+          <div class="uk-card uk-card-body uk-card-default uk-width-small uk-height-small uk-flex uk-flex-column uk-flex-center uk-flex-middle">
+            <uk-icon icon="wrench" height="64" width="64"></uk-icon>
+            Ingreso Soporte
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
 <% end %>

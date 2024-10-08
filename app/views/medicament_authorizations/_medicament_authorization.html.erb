@@ -1,0 +1,28 @@
+<table class="uk-table">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Cantidad</th>
+      <th>Frecuencia</th>
+      <th>Estado</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <%= medicament_authorization.name %>
+      </td>
+      <td>
+        <%= medicament_authorization.quantity %>
+      </td>
+      <td>
+        <%= "Cada #{medicament_authorization.periodicity} horas" %>
+      </td>
+      <td>
+        <span class="uk-badge <%= status_class medicament_authorization.status %>">
+          <%= status_text medicament_authorization.status %>
+        </span>
+      </td>
+    </tr>
+  </tbody>
+</table>

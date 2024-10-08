@@ -1,0 +1,31 @@
+es:
+  errors:
+    messages:
+      blank: "no puede estar vacío"
+  date:
+    day_names:
+      - Domingo
+      - Lunes
+      - Martes
+      - Miércoles
+      - Jueves
+      - Viernes
+      - Sábado
+    month_names:
+      -
+      - Enero
+      - Febrero
+      - Marzo
+      - Abril
+      - Mayo
+      - Junio
+      - Julio
+      - Agosto
+      - Septiembre
+      - Octubre
+      - Noviembre
+      - Diciembre
+  time:
+    formats:
+      long: "%A %d de %B de %Y a las %H:%M"
+      short: "%b %d, %Y"

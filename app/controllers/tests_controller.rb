@@ -3,7 +3,13 @@ class TestsController < ApplicationController
 
   # GET /tests or /tests.json
   def index
-    @tests = Test.all
+    if patient_signed_in?
+      @tests = current_patient.tests
+        .where("date_time < ?", DateTime.current)
+        .includes(:doctor)
+    else
+      @tests = Test.all
+    end
   end
 
   # GET /tests/1 or /tests/1.json

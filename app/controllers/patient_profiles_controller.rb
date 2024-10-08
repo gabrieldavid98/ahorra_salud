@@ -13,6 +13,7 @@ class PatientProfilesController < ApplicationController
   # GET /patient_profiles/new
   def new
     @patient_profile = PatientProfile.new
+    @identification_types = IdentificationType.all
   end
 
   # GET /patient_profiles/1/edit
@@ -22,10 +23,11 @@ class PatientProfilesController < ApplicationController
   # POST /patient_profiles or /patient_profiles.json
   def create
     @patient_profile = PatientProfile.new(patient_profile_params)
+    @patient_profile.patient_id = current_patient.id
 
     respond_to do |format|
       if @patient_profile.save
-        format.html { redirect_to @patient_profile, notice: "Patient profile was successfully created." }
+        format.html { redirect_to root_path, notice: "Perfil creado correctamente" }
         format.json { render :show, status: :created, location: @patient_profile }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -65,6 +67,7 @@ class PatientProfilesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def patient_profile_params
-      params.require(:patient_profile).permit(:patient_id, :names, :last_names, :identification_type_id, :identification, :address, :phone, :sex, :birthdate)
+      params.require(:patient_profile)
+        .permit(:names, :last_names, :identification_type_id, :identification, :address, :phone, :sex, :birthdate)
     end
 end

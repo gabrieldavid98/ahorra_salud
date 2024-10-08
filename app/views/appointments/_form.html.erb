@@ -2,7 +2,6 @@
   <% if appointment.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(appointment.errors.count, "error") %> prohibited this appointment from being saved:</h2>
-
       <ul>
         <% appointment.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -10,33 +9,43 @@
       </ul>
     </div>
   <% end %>
-
-  <div>
-    <%= form.label :doctor_id, style: "display: block" %>
-    <%= form.text_field :doctor_id %>
-  </div>
-
-  <div>
-    <%= form.label :user_id, style: "display: block" %>
-    <%= form.text_field :user_id %>
-  </div>
-
-  <div>
-    <%= form.label :speciality_id, style: "display: block" %>
-    <%= form.text_field :speciality_id %>
-  </div>
-
-  <div>
-    <%= form.label :health_center_id, style: "display: block" %>
-    <%= form.text_field :health_center_id %>
-  </div>
-
-  <div>
-    <%= form.label :date_time, style: "display: block" %>
-    <%= form.datetime_field :date_time %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
+  <fieldset class="uk-fieldset">
+    <div class="uk-margin-bottom">
+      <uk-select 
+      name="appointment[doctor_id]" 
+      placeholder="Seleccione un Doctor" uk-cloak>
+        <% doctors.each do |s| %>
+          <option value="<%= s.id %>"><%= s.names %> <%= s.last_names %></option>
+        <% end %>
+      </uk-select>
+    </div>
+    <div class="uk-margin-bottom">
+      <uk-select 
+      name="appointment[specialty_id]" 
+      class="uk-margin-bottom"
+      placeholder="Seleccione una Especialidad" uk-cloak>
+        <% specialties.each do |s| %>
+          <option value="<%= s.id %>"><%= s.name %></option>
+        <% end %>
+      </uk-select>
+    </div>
+    <div class="uk-margin-bottom">
+      <uk-select 
+      name="appointment[health_center_id]" 
+      class="uk-margin-bottom"
+      placeholder="Seleccione un Centro de Salud" uk-cloak>
+        <% health_centers.each do |s| %>
+          <option value="<%= s.id %>"><%= s.name %></option>
+        <% end %>
+      </uk-select>
+    </div>
+    <div class="uk-margin-bottom uk-flex uk-flex-column">
+      <%= form.label :date_time, "Fecha y Hora", class: "uk-text-small uk-margin-bottom" %>
+      <%= form.datetime_field :date_time, class: "uk-input" %>
+    </div>
+    <div class="uk-text-right">
+      <%= link_to "Cancelar", appointments_path, class: "uk-button uk-button-danger uk-margin-bottom" %>
+      <%= form.submit "Agendar Cita Medica", class: "uk-button uk-button-primary uk-margin-bottom" %>
+    </div>
+  </fieldset>
 <% end %>

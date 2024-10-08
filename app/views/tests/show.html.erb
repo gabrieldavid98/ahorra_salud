@@ -1,10 +1,10 @@
-<p style="color: green"><%= notice %></p>
-
-<%= render @test %>
-
-<div>
-  <%= link_to "Edit this test", edit_test_path(@test) %> |
-  <%= link_to "Back to tests", tests_path %>
-
-  <%= button_to "Destroy this test", @test, method: :delete %>
-</div>
+<%= render layout: "layouts/positioner", locals: { title: "Detalle" } do %>
+  <div id="<%= dom_id @test %>" class="uk-card">
+    <div class="uk-card-body">
+      <%= render @test %>
+    </div>
+    <div class="uk-card-footer uk-flex uk-flex-left">
+      <%= link_to "Regresar", tests_path, class: "uk-button uk-button-default" %>
+    </div>
+  </div>
+<% end %>

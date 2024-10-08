@@ -1,14 +1,14 @@
-<p style="color: green"><%= notice %></p>
-
-<h1>Tests</h1>
-
-<div id="tests">
-  <% @tests.each do |test| %>
-    <%= render test %>
-    <p>
-      <%= link_to "Show this test", test %>
-    </p>
-  <% end %>
-</div>
-
-<%= link_to "New test", new_test_path %>
+<%= render layout: "layouts/positioner", locals: { title: "Mis Resultados Medicos" } do %>
+  <div id="appointments" class="uk-margin-medium-bottom">
+    <% @tests.each do |test| %>
+      <div id="<%= dom_id test %>" class="uk-card uk-margin-top">
+        <div class="uk-card-body">
+          <%= render test %>
+        </div>
+        <div class="uk-card-footer uk-flex uk-flex-right">
+          <%= link_to "Ver", test, class: "uk-button uk-button-default" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>

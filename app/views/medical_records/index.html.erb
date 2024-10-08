@@ -1,0 +1,14 @@
+<%= render layout: "layouts/positioner", locals: { title: "Historia Clinica" } do %>
+  <div id="appointments" class="uk-margin-medium-bottom">
+    <% @medical_records.each do |medical_record| %>
+      <div id="<%= dom_id medical_record %>" class="uk-card uk-margin-top">
+        <div class="uk-card-body">
+          <%= render medical_record %>
+        </div>
+        <div class="uk-card-footer uk-flex uk-flex-right">
+          <%= link_to "Descargar", medical_record, class: "uk-button uk-button-secondary" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>

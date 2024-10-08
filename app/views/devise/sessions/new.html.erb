@@ -1,21 +1,28 @@
-<h2>Iniciar Sesión</h2>
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-  <div class="field">
-    <%= f.label :password, "Contraseña" %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me, "Recordarme" %>
-    </div>
+<%= render layout: "layouts/form_positioner", locals: { title: "Iniciar Sesión" } do %>
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <fieldset class="uk-fieldset">
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "uk-input uk-margin-bottom", placeholder: "Email" %>
+      <%= f.password_field :password, autocomplete: "current-password", class: "uk-input uk-margin-bottom", placeholder: "Contraseña" %>
+      <% if devise_mapping.rememberable? %>
+        <div class="uk-margin-bottom">
+          <%= f.check_box :remember_me, class: "uk-checkbox" %>
+          <%= f.label :remember_me, "Recordarme" %>
+        </div>
+      <% end %>
+      <div class="uk-text-center">
+        <%= f.submit "Iniciar Sesión", class: "uk-button uk-button-primary uk-margin-bottom" %>
+      </div>
+    </fieldset>
   <% end %>
-  <div class="actions">
-    <%= f.submit "Iniciar Sesión" %>
+  <%= render "devise/shared/links" %>
+  <div class="uk-margin-large-top uk-text-small">
+    <%= link_to root_path do %>
+      <div class="uk-flex uk-flex-middle">
+        <div>
+          <uk-icon icon="chevron-left" width="16" height="16" />
+        </div>
+        Regresar
+      </div>
+    <% end %>
   </div>
 <% end %>
-<%= render "devise/shared/links" %>

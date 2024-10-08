@@ -1,14 +1,17 @@
-<p style="color: green"><%= notice %></p>
-
-<h1>Appointments</h1>
-
-<div id="appointments">
-  <% @appointments.each do |appointment| %>
-    <%= render appointment %>
-    <p>
-      <%= link_to "Show this appointment", appointment %>
-    </p>
-  <% end %>
-</div>
-
-<%= link_to "New appointment", new_appointment_path %>
+<%= render layout: "layouts/positioner", locals: { title: "Mis Citas Medicas" } do %>
+  <div id="appointments" class="uk-margin-medium-bottom">
+    <div class="uk-text-right uk-margin-medium-bottom">
+      <%= link_to "Nueva Cita Medica", new_appointment_path, class: "uk-button uk-button-primary" %>
+    </div>
+    <% @appointments.each do |appointment| %>
+      <div id="<%= dom_id appointment %>" class="uk-card uk-margin-top">
+        <div class="uk-card-body">
+          <%= render appointment %>
+        </div>
+        <div class="uk-card-footer uk-flex uk-flex-right">
+          <%= link_to "Ver", appointment, class: "uk-button uk-button-default" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>

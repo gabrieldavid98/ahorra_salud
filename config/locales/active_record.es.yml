@@ -1,0 +1,7 @@
+es:
+  activerecord:
+    models:
+      patient: "paciente"
+    attributes:
+      patient:
+        password: "Contraseña"
