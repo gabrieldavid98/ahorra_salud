@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'chat/home'
   devise_for :supports
   devise_for :admins
   devise_for :patients
@@ -21,4 +20,11 @@ Rails.application.routes.draw do
   put '/medicament_authorizations/:id/authorize',
     to: 'medicament_authorizations#authorize',
     as: 'medicament_authorizations_authorize'
+
+  get '/medical_records/:id/as_pdf',
+    to: 'medical_records#save_as_pdf',
+    as: 'medical_records_save_as_pdf'
+
+  get 'chat/home'
+  post '/chat/:id/msg', to: 'chat#create', as: 'chat_msg_send'
 end

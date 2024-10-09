@@ -45,64 +45,76 @@
         })()
       </script>
     <% end %>
-    <% if patient_signed_in? %>
-      <div class="border-b border-border px-4">
-        <nav class="uk-navbar" uk-navbar>
-          <div class="uk-navbar-left gap-x-4 lg:gap-x-6">
-            <div class="uk-margin-large-left uk-navbar-item uk-text-large uk-flex uk-flex-row">
-              <div>
-                <uk-icon icon="heart-pulse" width="20" height="20" />
-              </div>
-              <%= link_to "Ahorra Salud", root_path, class: "uk-active", uk_toggle: '' %>
+    <div class="border-b border-border px-4">
+      <nav class="uk-navbar" uk-navbar>
+        <div class="uk-navbar-left gap-x-4 lg:gap-x-6">
+          <div class="uk-margin-large-left uk-navbar-item uk-text-large uk-flex uk-flex-row">
+            <div>
+              <uk-icon icon="heart-pulse" width="20" height="20" />
             </div>
-            <ul class="uk-navbar-nav gap-x-4 lg:gap-x-6">
-              <li class="uk-active">
-                <%= link_to "Inicio", root_path, class: "uk-link-muted", uk_toggle: '' %>
-              </li>
-            </ul>
+            <%= link_to "Ahorra Salud", root_path, class: "uk-active", uk_toggle: '' %>
           </div>
-          <div class="uk-navbar-right gap-x-4 lg:gap-x-6">
-            <div class="uk-navbar-item">
-              <div class="uk-margin-bottom">
-                <div class="uk-flex uk-flex-column uk-flex-middle uk-flex-center">
-                  <div class="uk-inline">
-                    <button class="uk-icon-button uk-icon-button-small uk-icon-button-outline">
-                      <uk-icon icon="palette" uk-cloak></uk-icon>
-                    </button>
-                    <div class="uk-card uk-card-body uk-card-default uk-drop uk-width-large" 
+          <ul class="uk-navbar-nav gap-x-4 lg:gap-x-6">
+            <li class="uk-active">
+              <%= link_to "Inicio", root_path, class: "uk-link-muted", uk_toggle: '' %>
+            </li>
+          </ul>
+        </div>
+        <div class="uk-navbar-right gap-x-4 lg:gap-x-6">
+          <div class="uk-navbar-item">
+            <div class="uk-margin-bottom">
+              <div class="uk-flex uk-flex-column uk-flex-middle uk-flex-center">
+                <div class="uk-inline">
+                  <button class="uk-icon-button uk-icon-button-small uk-icon-button-outline">
+                    <uk-icon icon="palette" uk-cloak></uk-icon>
+                  </button>
+                  <div class="uk-card uk-card-body uk-card-default uk-drop uk-width-large" 
             uk-drop="mode: click; offset: 8; pos: bottom-center">
-                      <div class="uk-card-title uk-margin-medium-bottom">Customize</div>
-                      <uk-theme-switcher></uk-theme-switcher>
-                    </div>
+                    <div class="uk-card-title uk-margin-medium-bottom">Customize</div>
+                    <uk-theme-switcher></uk-theme-switcher>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="uk-navbar-item">
-              <a class="inline-flex h-8 w-8 items-center justify-center ring-ring focus:outline-none focus-visible:ring-1 uk-margin-right" href="#">
-                <span class="relative flex h-8 w-8 shrink-0 overflow-hidden uk-text-large">
+          </div>
+          <div class="uk-navbar-item">
+            <a class="inline-flex h-8 w-8 items-center justify-center ring-ring focus:outline-none focus-visible:ring-1 uk-margin-right" href="#">
+              <span class="relative flex h-8 w-8 shrink-0 overflow-hidden uk-text-large">
+                <% if patient_signed_in? %>
                   <% if !current_patient.patient_profile.nil? %>
                     <%= "#{current_patient.patient_profile.names} #{current_patient.patient_profile.last_names}" %>
                   <% end %>
-                </span>
-              </a>
-              <div class="uk-drop uk-dropdown" uk-dropdown="mode: click; pos: bottom-right">
-                <ul class="uk-dropdown-nav uk-nav">
-                  <li class="uk-nav-divider"></li>
-                  <li>
+                <% end %>
+                <% if support_signed_in? %>
+                  <%= current_support.email %>
+                <% end %>
+              </span>
+            </a>
+            <div class="uk-drop uk-dropdown" uk-dropdown="mode: click; pos: bottom-right">
+              <ul class="uk-dropdown-nav uk-nav">
+                <li class="uk-nav-divider"></li>
+                <li>
+                  <% if patient_signed_in? %>
                     <%= link_to "Cerrar Sesión",
                         destroy_patient_session_path, 
                         method: :delete,
                         data: { turbo_method: :delete }, 
                         class: "justify-between", uk_toggle: "" %>
-                  </li>
-                </ul>
-              </div>
+                  <% end %>
+                  <% if support_signed_in? %>
+                    <%= link_to "Cerrar Sesión",
+                        destroy_support_session_path, 
+                        method: :delete,
+                        data: { turbo_method: :delete }, 
+                        class: "justify-between", uk_toggle: "" %>
+                  <% end %>
+                </li>
+              </ul>
             </div>
           </div>
-        </nav>
-      </div>
-    <% end %>
+        </div>
+      </nav>
+    </div>
     <%= yield %>
   </body>
 </html>

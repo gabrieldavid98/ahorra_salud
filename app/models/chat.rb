@@ -9,4 +9,6 @@
 #
 class Chat < ApplicationRecord
   belongs_to :patient
+
+  has_many :chat_messages, dependent: :delete_all
 end

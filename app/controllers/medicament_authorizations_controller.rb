@@ -3,6 +3,7 @@ class MedicamentAuthorizationsController < ApplicationController
 
   before_action :set_medicament_authorization, only: %i[ show edit update destroy authorize]
   before_action :create_missing_medicament_authorizations, only: [:index]
+  before_action :authorize_pendings, only: [:index]
 
   # GET /medicament_authorizations or /medicament_authorizations.json
   def index

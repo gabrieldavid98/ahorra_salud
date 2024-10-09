@@ -1,2 +1,20 @@
 <%= render layout: "layouts/positioner", locals: { title: "Chat de Soporte" } do %>
+  <div class="uk-card">
+    <div class="uk-card-body uk-margin-top uk-margin-bottom uk-height-large uk-height-max-large uk-overflow-auto">
+      <% @chat.chat_messages.each do |cm| %>
+        <div class="uk-card uk-card-body uk-margin">
+          <%= cm.content %>
+          <div class="uk-text-right uk-text-small uk-text-muted">
+            <%= I18n.l(cm.created_at, format: :long) %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <div class="uk-card-footer uk-flex">
+      <%= form_with(model: @chat_message, url: chat_msg_send_path(@chat.id), class: "uk-width-1-1") do |f| %>
+        <%= f.text_field :content, autofocus: true, class: "uk-input", placeholder: "Mensaje" %>
+        <%= f.submit "", class: "uk-hidden" %>
+      <% end %>
+    </div>
+  </div>
 <% end %>

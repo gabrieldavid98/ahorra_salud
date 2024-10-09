@@ -75,3 +75,5 @@ end
 gem "devise", "~> 4.9"
 
 gem "dockerfile-rails", ">= 1.6", :group => :development
+
+gem "prawn", "~> 2.5"

@@ -6,7 +6,7 @@
           <%= render medical_record %>
         </div>
         <div class="uk-card-footer uk-flex uk-flex-right">
-          <%= link_to "Descargar", medical_record, class: "uk-button uk-button-secondary" %>
+          <%= link_to "Descargar", medical_records_save_as_pdf_path(medical_record.id), class: "uk-button uk-button-secondary", target: "_blank" %>
         </div>
       </div>
     <% end %>

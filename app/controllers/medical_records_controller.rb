@@ -1,5 +1,5 @@
 class MedicalRecordsController < ApplicationController
-  before_action :set_medical_record, only: %i[ show edit update destroy ]
+  before_action :set_medical_record, only: %i[ show edit update destroy save_as_pdf ]
   before_action :create_missing_medical_records, only: [:index]
 
   # GET /medical_records or /medical_records.json
@@ -60,6 +60,62 @@ class MedicalRecordsController < ApplicationController
       format.html { redirect_to medical_records_path, status: :see_other, notice: "Medical record was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  def save_as_pdf
+    full_patient_name = "#{@medical_record.patient.patient_profile.names} #{@medical_record.patient.patient_profile.last_names}"
+    full_doctor_name = "#{@medical_record.doctor.names} #{@medical_record.doctor.last_names}"
+    specialty = @medical_record.appointment.specialty.name
+    appointment_date = I18n.l(@medical_record.appointment.date_time, format: :long)
+    id_type = @medical_record.patient.patient_profile.identification_type.long_name
+    identification = @medical_record.patient.patient_profile.identification
+
+    pdf = Prawn::Document.new
+
+    pdf.pad(20) do
+      pdf.text "Ahorra Salud"
+      pdf.stroke_horizontal_rule
+    end
+
+    pdf.pad_bottom(10) do
+      pdf.text "Historia Clinica de #{full_patient_name}"
+      pdf.text "#{id_type} #{identification}"
+      pdf.stroke_horizontal_rule
+    end
+
+
+    pdf.pad_bottom(10) do
+      pdf.text "Doctor: #{full_doctor_name}"
+      pdf.text "Especialidad: #{specialty}"
+      pdf.text "Fecha de Consulta: #{appointment_date}"
+      pdf.stroke_horizontal_rule
+    end
+
+    pdf.pad_bottom(10) do
+      pdf.text "Discapacidad: "
+      pdf.text @medical_record.disability
+    end
+
+    pdf.pad_bottom(10) do
+      pdf.text "Alergias: "
+      pdf.text @medical_record.allergies
+    end
+
+
+    pdf.pad_bottom(10) do
+      pdf.text "Razon de consulta: "
+      pdf.text @medical_record.appointment_reason
+      pdf.stroke_horizontal_rule
+    end
+
+    pdf.pad_bottom(10) do
+      pdf.text "Recomendaciones: "
+      pdf.text @medical_record.recommendations
+    end
+
+    send_data pdf.render,
+      filename: "#{full_patient_name.gsub(" ", "-").downcase}-#{DateTime.current.to_i}.pdf",
+      type: "application/pdf"
   end
 
   private
